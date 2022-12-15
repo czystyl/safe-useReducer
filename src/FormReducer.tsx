@@ -1,4 +1,9 @@
-import { EventHandler, FormEventHandler, useReducer } from 'react';
+import {
+  EventHandler,
+  FormEventHandler,
+  isValidElement,
+  useReducer,
+} from 'react';
 import TextInput from './components/TextInput';
 import Button from './components/Button';
 import { sendToAPI } from './fakeApi';
@@ -43,7 +48,7 @@ function FormReducerPlus() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   async function handleEmailSend() {
-    if (!/^\S+@\S+\.\S+$/.test(state.email)) {
+    if (!isValidElement(state.email)) {
       return dispatch({ type: 'failed', error: 'Invalid email' });
     }
 

@@ -4,6 +4,7 @@ import Button from './components/Button';
 import { sendToAPI } from './fakeApi';
 import Success from './components/Success';
 import ErrorMessage from './components/ErrorMessage';
+import { isEmailValid } from './isValidEmail';
 
 function FormState() {
   const [email, setEmail] = useState('');
@@ -16,7 +17,7 @@ function FormState() {
     setSuccess(null);
     setErrorMessage(null);
 
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
+    if (!isEmailValid(email)) {
       setLoading(false);
       return setErrorMessage('Invalid email');
     }
